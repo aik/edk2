@@ -840,6 +840,8 @@ PeiCheckAndSwitchStack (
       //
       // Calculate new HandOffTable and PrivateData address in permanent memory's stack
       //
+  DEBUG ((DEBUG_INFO, "TRACE1 ")); DEBUG((DEBUG_INFO, __func__)); DEBUG ((DEBUG_INFO, " %d %lx\n", __LINE__, (unsigned long) SecCoreData));
+
       if (StackOffsetPositive) {
         SecCoreData = (CONST EFI_SEC_PEI_HAND_OFF *)((UINTN)(VOID *)SecCoreData + StackOffset);
         Private     = (PEI_CORE_INSTANCE *)((UINTN)(VOID *)Private + StackOffset);
@@ -848,6 +850,7 @@ PeiCheckAndSwitchStack (
         Private     = (PEI_CORE_INSTANCE *)((UINTN)(VOID *)Private - StackOffset);
       }
 
+  //DEBUG ((DEBUG_INFO, "TRACE2 ")); DEBUG((DEBUG_INFO, __func__)); DEBUG ((DEBUG_INFO, " %d %lx\n", __LINE__, (unsigned long) SecCoreData));
       //
       // Temporary Ram Support PPI is provided by platform, it will copy
       // temporary memory to permanent memory and do stack switching.
@@ -861,6 +864,7 @@ PeiCheckAndSwitchStack (
                                 TemporaryRamSize
                                 );
 
+  DEBUG ((DEBUG_INFO, "TRACE3 ")); DEBUG((DEBUG_INFO, __func__)); DEBUG ((DEBUG_INFO, " %d %lx\n", __LINE__, (unsigned long) SecCoreData));
       //
       // Migrate memory pages allocated in pre-memory phase.
       // It could not be called before calling TemporaryRamSupportPpi->TemporaryRamMigration()
